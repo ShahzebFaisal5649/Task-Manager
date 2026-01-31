@@ -37,17 +37,8 @@
 The main dashboard features a sleek dark interface with gradient background effects, glassmorphism cards, and real-time statistics.
 
 <p align="center">
-  <img src="screenshots/dashboard.png" alt="Dashboard" width="100%">
+  <img src="screenshots/Dashboard.jpg" alt="Dashboard" width="100%">
 </p>
-
-**Key Features:**
-- Personalized greeting based on time of day
-- Task statistics with animated colored icons (Total, In Progress, Completed, Progress %)
-- Quick Actions panel with gradient buttons
-- Recent Tasks list with priority indicators
-- Project cards with progress bars and hover effects
-- Grid/List view toggle
-- Search functionality
 
 ---
 
@@ -55,16 +46,8 @@ The main dashboard features a sleek dark interface with gradient background effe
 Beautiful dark-themed authentication with animated gradient background effects and glassmorphism form design.
 
 <p align="center">
-  <img src="screenshots/login.png" alt="Login Page" width="400">
+  <img src="screenshots/Login_Page.jpg" alt="Login Page" width="100%">
 </p>
-
-**Design Highlights:**
-- Deep dark background (#0a0a0f)
-- Animated purple/indigo gradient blur orbs
-- Subtle grid pattern overlay
-- Glassmorphism card with backdrop blur
-- Gradient submit button with glow effect
-- Show/hide password toggle
 
 ---
 
@@ -72,55 +55,34 @@ Beautiful dark-themed authentication with animated gradient background effects a
 Matching registration interface with real-time password validation and confirmation feedback.
 
 <p align="center">
-  <img src="screenshots/register.png" alt="Register Page" width="400">
+  <img src="screenshots/Register_Page.jpg" alt="Register Page" width="100%">
 </p>
 
 ---
 
-### Project Board (Kanban)
-Organize tasks with a stunning Kanban board featuring color-coded columns and smooth interactions.
-
-<p align="center">
-  <img src="screenshots/kanban.png" alt="Project Kanban Board" width="100%">
-</p>
-
-**Features:**
-- Three columns with gradient headers: To Do, In Progress, Done
-- Column-specific icons and colors
-- Glassmorphism task cards with hover effects
-- Priority badges (High, Medium, Low) with color indicators
-- Quick action buttons (Start, Back, Done, Reopen)
-- Tag support for better organization
-- Board/List view toggle
-- Dark-themed task creation modal
-
----
-
-### Create Project Modal
+### Create Project
 Create new projects with custom accent colors in a sleek dark modal.
 
 <p align="center">
-  <img src="screenshots/create-project.png" alt="Create Project Modal" width="400">
+  <img src="screenshots/Create Project.jpg" alt="Create Project" width="100%">
 </p>
 
 ---
 
-### Quick Task Modal
+### Task Creation
 Rapidly add tasks to any project with priority and status options.
 
 <p align="center">
-  <img src="screenshots/quick-task.png" alt="Quick Task Modal" width="400">
+  <img src="screenshots/Task Creation.jpg" alt="Task Creation" width="100%">
 </p>
 
 ---
 
-### Mobile Responsive
-Fully responsive dark design that looks stunning on all devices.
+### Progress Tracking
+Track your task progress with visual indicators and statistics.
 
 <p align="center">
-  <img src="screenshots/mobile-dashboard.png" alt="Mobile Dashboard" width="300">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="screenshots/mobile-login.png" alt="Mobile Login" width="300">
+  <img src="screenshots/Progress.jpg" alt="Progress Tracking" width="100%">
 </p>
 
 ---
