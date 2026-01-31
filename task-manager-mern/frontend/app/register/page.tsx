@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function RegisterPage() {
     const [name, setName] = useState('');
@@ -43,9 +44,9 @@ export default function RegisterPage() {
         <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center px-4 py-8 relative overflow-hidden">
             {/* Animated Background */}
             <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -top-40 -left-40 w-80 h-80 bg-indigo-600/20 rounded-full blur-[100px]"></div>
-                <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-600/20 rounded-full blur-[100px]"></div>
-                <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-blue-600/10 rounded-full blur-[100px]"></div>
+                <div className="absolute -top-40 -left-40 w-80 h-80 bg-cyan-500/20 rounded-full blur-[100px]"></div>
+                <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-emerald-500/20 rounded-full blur-[100px]"></div>
+                <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-green-500/10 rounded-full blur-[100px]"></div>
             </div>
 
             {/* Grid Pattern */}
@@ -54,12 +55,14 @@ export default function RegisterPage() {
             <div className="w-full max-w-sm relative z-10">
                 {/* Logo */}
                 <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl mb-4 shadow-lg shadow-indigo-500/25">
-                        <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" />
-                            <rect x="9" y="3" width="6" height="4" rx="1" />
-                            <path d="M9 14l2 2 4-4" />
-                        </svg>
+                    <div className="inline-flex items-center justify-center w-20 h-20 mb-4">
+                        <Image
+                            src="/logo.png"
+                            alt="TaskFlow Logo"
+                            width={80}
+                            height={80}
+                            className="object-contain"
+                        />
                     </div>
                     <h1 className="text-2xl font-bold text-white mb-1">Create account</h1>
                     <p className="text-gray-400 text-sm">Start managing your tasks today</p>
@@ -89,8 +92,9 @@ export default function RegisterPage() {
                                     type="text"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-gray-500 transition-all"
+                                    className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 text-white placeholder-gray-500 transition-all caret-white"
                                     placeholder="John Doe"
+                                    style={{ color: '#ffffff' }}
                                     required
                                     disabled={loading}
                                 />
@@ -111,8 +115,9 @@ export default function RegisterPage() {
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-gray-500 transition-all"
+                                    className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 text-white placeholder-gray-500 transition-all caret-white"
                                     placeholder="you@example.com"
+                                    style={{ color: '#ffffff' }}
                                     required
                                     disabled={loading}
                                 />
@@ -133,11 +138,12 @@ export default function RegisterPage() {
                                     type={showPassword ? 'text' : 'password'}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full pl-10 pr-12 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-gray-500 transition-all"
+                                    className="w-full pl-10 pr-12 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 text-white placeholder-gray-500 transition-all caret-white"
                                     placeholder="••••••••"
                                     required
                                     disabled={loading}
                                     minLength={6}
+                                    style={{ color: '#ffffff' }}
                                 />
                                 <button
                                     type="button"
@@ -175,10 +181,11 @@ export default function RegisterPage() {
                                     type="password"
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-gray-500 transition-all"
+                                    className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 text-white placeholder-gray-500 transition-all caret-white"
                                     placeholder="••••••••"
                                     required
                                     disabled={loading}
+                                    style={{ color: '#ffffff' }}
                                 />
                             </div>
                             {confirmPassword && password !== confirmPassword && (
@@ -193,7 +200,7 @@ export default function RegisterPage() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-semibold rounded-xl hover:from-indigo-500 hover:to-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 flex items-center justify-center"
+                        className="w-full py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white text-sm font-semibold rounded-xl hover:from-cyan-400 hover:to-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 flex items-center justify-center"
                     >
                         {loading ? (
                             <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
@@ -208,7 +215,7 @@ export default function RegisterPage() {
 
                 <p className="text-center text-sm text-gray-500 mt-6">
                     Already have an account?{' '}
-                    <Link href="/login" className="text-indigo-400 font-medium hover:text-indigo-300 transition-colors">
+                    <Link href="/login" className="text-cyan-400 font-medium hover:text-cyan-300 transition-colors">
                         Sign in
                     </Link>
                 </p>

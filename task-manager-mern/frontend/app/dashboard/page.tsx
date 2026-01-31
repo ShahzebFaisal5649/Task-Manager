@@ -5,6 +5,7 @@ import { useAuth } from '@/context/AuthContext';
 import { projectAPI, taskAPI } from '@/lib/api';
 import { Project, Task } from '@/lib/types';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function DashboardPage() {
     const { user, logout } = useAuth();
@@ -14,7 +15,7 @@ export default function DashboardPage() {
     const [showModal, setShowModal] = useState(false);
     const [showQuickTask, setShowQuickTask] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
-    const [newProject, setNewProject] = useState({ name: '', description: '', color: '#6366f1' });
+    const [newProject, setNewProject] = useState({ name: '', description: '', color: '#06b6d4' });
     const [quickTask, setQuickTask] = useState({ title: '', projectId: '' });
     const router = useRouter();
 
@@ -46,7 +47,7 @@ export default function DashboardPage() {
         try {
             await projectAPI.create(newProject);
             setShowModal(false);
-            setNewProject({ name: '', description: '', color: '#6366f1' });
+            setNewProject({ name: '', description: '', color: '#06b6d4' });
             fetchData();
         } catch (error) {
             console.error('Failed to create project');
@@ -94,7 +95,7 @@ export default function DashboardPage() {
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         .slice(0, 5);
 
-    const colors = ['#6366f1', '#8b5cf6', '#a855f7', '#ec4899', '#f43f5e', '#f97316', '#eab308', '#22c55e', '#14b8a6', '#06b6d4'];
+    const colors = ['#06b6d4', '#0ea5e9', '#22c55e', '#10b981', '#14b8a6', '#f59e0b', '#f97316', '#ec4899', '#8b5cf6', '#6366f1'];
 
     if (!user) return null;
 
@@ -102,8 +103,8 @@ export default function DashboardPage() {
         <div className="min-h-screen bg-[#0a0a0f] relative">
             {/* Background Effects */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[150px]"></div>
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[150px]"></div>
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[150px]"></div>
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[150px]"></div>
             </div>
 
             {/* Grid Pattern */}
@@ -114,19 +115,21 @@ export default function DashboardPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
                     <div className="flex justify-between items-center h-16">
                         <div className="flex items-center space-x-3">
-                            <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
-                                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" />
-                                    <rect x="9" y="3" width="6" height="4" rx="1" />
-                                    <path d="M9 14l2 2 4-4" />
-                                </svg>
+                            <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                                <Image
+                                    src="/logo.png"
+                                    alt="TaskFlow Logo"
+                                    width={40}
+                                    height={40}
+                                    className="object-contain"
+                                />
                             </div>
                             <span className="text-xl font-bold text-white">TaskFlow</span>
                         </div>
 
                         <div className="flex items-center space-x-4">
                             <div className="hidden sm:flex items-center space-x-3">
-                                <div className="w-9 h-9 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
+                                <div className="w-9 h-9 bg-gradient-to-br from-cyan-500 to-emerald-500 rounded-full flex items-center justify-center">
                                     <span className="text-white font-semibold text-sm">
                                         {user.name.charAt(0).toUpperCase()}
                                     </span>
@@ -158,8 +161,8 @@ export default function DashboardPage() {
                     {/* Total Tasks */}
                     <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 hover:bg-white/[0.07] transition-all group">
                         <div className="flex items-center justify-between mb-4">
-                            <div className="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <svg className="w-6 h-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                            <div className="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <svg className="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                 </svg>
                             </div>
@@ -195,7 +198,7 @@ export default function DashboardPage() {
                     </div>
 
                     {/* Progress */}
-                    <div className="bg-gradient-to-br from-indigo-600/20 to-purple-600/20 backdrop-blur-sm border border-indigo-500/20 rounded-2xl p-5 hover:from-indigo-600/30 hover:to-purple-600/30 transition-all group">
+                    <div className="bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-5 hover:from-cyan-500/30 hover:to-emerald-500/30 transition-all group">
                         <div className="flex items-center justify-between mb-4">
                             <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                                 <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
@@ -207,7 +210,7 @@ export default function DashboardPage() {
                         <p className="text-sm text-gray-300">Progress</p>
                         <div className="mt-3 bg-white/10 rounded-full h-2">
                             <div
-                                className="bg-gradient-to-r from-indigo-500 to-purple-500 h-2 rounded-full transition-all"
+                                className="bg-gradient-to-r from-cyan-500 to-emerald-500 h-2 rounded-full transition-all"
                                 style={{ width: `${completionRate}%` }}
                             ></div>
                         </div>
@@ -219,7 +222,7 @@ export default function DashboardPage() {
                     {/* Quick Actions */}
                     <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
                         <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
-                            <svg className="w-5 h-5 mr-2 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg className="w-5 h-5 mr-2 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                             Quick Actions
@@ -227,10 +230,10 @@ export default function DashboardPage() {
                         <div className="space-y-3">
                             <button
                                 onClick={() => setShowModal(true)}
-                                className="w-full flex items-center space-x-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-indigo-500/30 transition-all text-left group"
+                                className="w-full flex items-center space-x-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-cyan-500/30 transition-all text-left group"
                             >
-                                <div className="w-10 h-10 bg-indigo-500/20 rounded-lg flex items-center justify-center group-hover:bg-indigo-500/30 transition-colors">
-                                    <svg className="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                <div className="w-10 h-10 bg-cyan-500/20 rounded-lg flex items-center justify-center group-hover:bg-cyan-500/30 transition-colors">
+                                    <svg className="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                                     </svg>
                                 </div>
@@ -242,10 +245,10 @@ export default function DashboardPage() {
                             <button
                                 onClick={() => setShowQuickTask(true)}
                                 disabled={projects.length === 0}
-                                className="w-full flex items-center space-x-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-purple-500/30 transition-all text-left group disabled:opacity-50"
+                                className="w-full flex items-center space-x-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-emerald-500/30 transition-all text-left group disabled:opacity-50"
                             >
-                                <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center group-hover:bg-purple-500/30 transition-colors">
-                                    <svg className="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
+                                    <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                                     </svg>
                                 </div>
@@ -260,7 +263,7 @@ export default function DashboardPage() {
                     {/* Recent Tasks */}
                     <div className="lg:col-span-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
                         <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
-                            <svg className="w-5 h-5 mr-2 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg className="w-5 h-5 mr-2 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             Recent Tasks
@@ -301,7 +304,7 @@ export default function DashboardPage() {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                         <div>
                             <h3 className="text-lg font-semibold text-white flex items-center">
-                                <svg className="w-5 h-5 mr-2 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg className="w-5 h-5 mr-2 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
                                 </svg>
                                 Projects
@@ -320,14 +323,15 @@ export default function DashboardPage() {
                                     placeholder="Search..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="pl-10 pr-4 py-2 w-full sm:w-48 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                                    className="pl-10 pr-4 py-2 w-full sm:w-48 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 caret-white"
+                                    style={{ color: '#ffffff' }}
                                 />
                             </div>
 
                             {/* New Project Button */}
                             <button
                                 onClick={() => setShowModal(true)}
-                                className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-xl hover:from-indigo-500 hover:to-purple-500 transition-all shadow-lg shadow-indigo-500/25 flex items-center space-x-2"
+                                className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white text-sm font-medium rounded-xl hover:from-cyan-400 hover:to-emerald-400 transition-all shadow-lg shadow-cyan-500/25 flex items-center space-x-2"
                             >
                                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -340,7 +344,7 @@ export default function DashboardPage() {
                     {/* Loading */}
                     {loading ? (
                         <div className="flex justify-center py-16">
-                            <div className="w-10 h-10 border-2 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin"></div>
+                            <div className="w-10 h-10 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin"></div>
                         </div>
                     ) : filteredProjects.length === 0 ? (
                         <div className="text-center py-16">
@@ -353,7 +357,7 @@ export default function DashboardPage() {
                             <p className="text-gray-500 text-sm mb-4">Create your first project to get started</p>
                             <button
                                 onClick={() => setShowModal(true)}
-                                className="px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-xl hover:from-indigo-500 hover:to-purple-500 transition-all shadow-lg shadow-indigo-500/25"
+                                className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white text-sm font-medium rounded-xl hover:from-cyan-400 hover:to-emerald-400 transition-all shadow-lg shadow-cyan-500/25"
                             >
                                 Create Project
                             </button>
@@ -431,8 +435,9 @@ export default function DashboardPage() {
                                     type="text"
                                     value={newProject.name}
                                     onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
-                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-white placeholder-gray-500"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 text-white placeholder-gray-500 caret-white"
                                     placeholder="Project name"
+                                    style={{ color: '#ffffff' }}
                                     required
                                 />
                             </div>
@@ -441,8 +446,9 @@ export default function DashboardPage() {
                                 <textarea
                                     value={newProject.description}
                                     onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
-                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-white placeholder-gray-500"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 text-white placeholder-gray-500 caret-white"
                                     placeholder="What's this project about?"
+                                    style={{ color: '#ffffff' }}
                                     rows={3}
                                 />
                             </div>
@@ -470,7 +476,7 @@ export default function DashboardPage() {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-xl hover:from-indigo-500 hover:to-purple-500 transition-all shadow-lg shadow-indigo-500/25"
+                                    className="flex-1 px-4 py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white text-sm font-medium rounded-xl hover:from-cyan-400 hover:to-emerald-400 transition-all shadow-lg shadow-cyan-500/25"
                                 >
                                     Create
                                 </button>
@@ -499,8 +505,9 @@ export default function DashboardPage() {
                                 <select
                                     value={quickTask.projectId}
                                     onChange={(e) => setQuickTask({ ...quickTask, projectId: e.target.value })}
-                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-white"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 text-white"
                                     required
+                                    style={{ color: '#ffffff' }}
                                 >
                                     <option value="" className="bg-[#12121a]">Select project</option>
                                     {projects.map(p => (
@@ -514,8 +521,9 @@ export default function DashboardPage() {
                                     type="text"
                                     value={quickTask.title}
                                     onChange={(e) => setQuickTask({ ...quickTask, title: e.target.value })}
-                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-white placeholder-gray-500"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 text-white placeholder-gray-500 caret-white"
                                     placeholder="What needs to be done?"
+                                    style={{ color: '#ffffff' }}
                                     required
                                 />
                             </div>
@@ -529,7 +537,7 @@ export default function DashboardPage() {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-xl hover:from-indigo-500 hover:to-purple-500 transition-all shadow-lg shadow-indigo-500/25"
+                                    className="flex-1 px-4 py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white text-sm font-medium rounded-xl hover:from-cyan-400 hover:to-emerald-400 transition-all shadow-lg shadow-cyan-500/25"
                                 >
                                     Add Task
                                 </button>

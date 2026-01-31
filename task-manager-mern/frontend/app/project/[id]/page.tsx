@@ -180,7 +180,7 @@ export default function ProjectPage() {
             case 'todo':
                 return 'from-gray-500/20 to-gray-600/20';
             case 'in-progress':
-                return 'from-blue-500/20 to-indigo-500/20';
+                return 'from-cyan-500/20 to-blue-500/20';
             case 'completed':
                 return 'from-emerald-500/20 to-green-500/20';
             default:
@@ -198,7 +198,7 @@ export default function ProjectPage() {
                 );
             case 'in-progress':
                 return (
-                    <svg className="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                 );
@@ -216,8 +216,8 @@ export default function ProjectPage() {
             <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f]">
                 <div className="flex flex-col items-center space-y-4">
                     <div className="relative">
-                        <div className="w-12 h-12 border-2 border-indigo-500/20 rounded-full"></div>
-                        <div className="absolute top-0 left-0 w-12 h-12 border-2 border-indigo-500 rounded-full border-t-transparent animate-spin"></div>
+                        <div className="w-12 h-12 border-2 border-cyan-500/20 rounded-full"></div>
+                        <div className="absolute top-0 left-0 w-12 h-12 border-2 border-cyan-500 rounded-full border-t-transparent animate-spin"></div>
                     </div>
                     <p className="text-gray-400 text-sm">Loading project...</p>
                 </div>
@@ -237,7 +237,7 @@ export default function ProjectPage() {
                     <p className="text-gray-400 mb-4">Project not found</p>
                     <button
                         onClick={() => router.push('/dashboard')}
-                        className="text-indigo-400 hover:text-indigo-300 transition font-medium"
+                        className="text-cyan-400 hover:text-cyan-300 transition font-medium"
                     >
                         Back to Dashboard
                     </button>
@@ -256,9 +256,9 @@ export default function ProjectPage() {
         <div className="min-h-screen bg-[#0a0a0f] relative">
             {/* Background Effects */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-600/8 rounded-full blur-[150px]"></div>
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-600/8 rounded-full blur-[150px]"></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[120px]"></div>
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/8 rounded-full blur-[150px]"></div>
+                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-emerald-500/8 rounded-full blur-[150px]"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-green-500/5 rounded-full blur-[120px]"></div>
             </div>
 
             {/* Grid Pattern */}
@@ -360,7 +360,7 @@ export default function ProjectPage() {
                                     });
                                     setShowModal(true);
                                 }}
-                                className="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-xl hover:from-indigo-500 hover:to-purple-500 transition shadow-lg shadow-indigo-500/25 flex items-center space-x-2"
+                                className="px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white text-sm font-medium rounded-xl hover:from-cyan-400 hover:to-emerald-400 transition shadow-lg shadow-cyan-500/25 flex items-center space-x-2"
                             >
                                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -464,7 +464,7 @@ export default function ProjectPage() {
                                                                         e.stopPropagation();
                                                                         handleUpdateTaskStatus(task._id, 'in-progress');
                                                                     }}
-                                                                    className="px-2 py-1 text-xs text-blue-400 hover:bg-blue-500/10 rounded-lg transition"
+                                                                    className="px-2 py-1 text-xs text-cyan-400 hover:bg-cyan-500/10 rounded-lg transition"
                                                                 >
                                                                     Start
                                                                 </button>
@@ -497,7 +497,7 @@ export default function ProjectPage() {
                                                                         e.stopPropagation();
                                                                         handleUpdateTaskStatus(task._id, 'in-progress');
                                                                     }}
-                                                                    className="px-2 py-1 text-xs text-indigo-400 hover:bg-indigo-500/10 rounded-lg transition"
+                                                                    className="px-2 py-1 text-xs text-cyan-400 hover:bg-cyan-500/10 rounded-lg transition"
                                                                 >
                                                                     Reopen
                                                                 </button>
@@ -567,7 +567,7 @@ export default function ProjectPage() {
                                                 <span className={`px-2.5 py-1 text-xs font-medium rounded-lg ${task.status === 'completed'
                                                     ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
                                                     : task.status === 'in-progress'
-                                                        ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                                                        ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
                                                         : 'bg-gray-500/10 text-gray-400 border border-gray-500/20'
                                                     }`}>
                                                     {task.status === 'in-progress' ? 'In Progress' : task.status === 'todo' ? 'To Do' : 'Done'}
@@ -616,8 +616,8 @@ export default function ProjectPage() {
                     <div className="bg-[#12121a] border border-white/10 rounded-2xl p-6 max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto">
                         <div className="flex items-center justify-between mb-6">
                             <div className="flex items-center space-x-3">
-                                <div className="w-10 h-10 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl flex items-center justify-center">
-                                    <svg className="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <div className="w-10 h-10 bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 rounded-xl flex items-center justify-center">
+                                    <svg className="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                                     </svg>
                                 </div>
@@ -647,8 +647,9 @@ export default function ProjectPage() {
                                     type="text"
                                     value={newTask.title}
                                     onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-gray-500 transition"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 text-white placeholder-gray-500 transition caret-white"
                                     placeholder="Enter task title"
+                                    style={{ color: '#ffffff' }}
                                     required
                                 />
                             </div>
@@ -660,8 +661,9 @@ export default function ProjectPage() {
                                 <textarea
                                     value={newTask.description}
                                     onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-gray-500 transition resize-none"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 text-white placeholder-gray-500 transition resize-none caret-white"
                                     placeholder="Add task description..."
+                                    style={{ color: '#ffffff' }}
                                     rows={3}
                                 />
                             </div>
@@ -674,7 +676,8 @@ export default function ProjectPage() {
                                     <select
                                         value={newTask.status}
                                         onChange={(e) => setNewTask({ ...newTask, status: e.target.value as any })}
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white transition appearance-none cursor-pointer"
+                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 text-white transition appearance-none cursor-pointer"
+                                        style={{ color: '#ffffff' }}
                                     >
                                         <option value="todo" className="bg-[#12121a]">To Do</option>
                                         <option value="in-progress" className="bg-[#12121a]">In Progress</option>
@@ -689,7 +692,8 @@ export default function ProjectPage() {
                                     <select
                                         value={newTask.priority}
                                         onChange={(e) => setNewTask({ ...newTask, priority: e.target.value as any })}
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white transition appearance-none cursor-pointer"
+                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 text-white transition appearance-none cursor-pointer"
+                                        style={{ color: '#ffffff' }}
                                     >
                                         <option value="low" className="bg-[#12121a]">Low</option>
                                         <option value="medium" className="bg-[#12121a]">Medium</option>
@@ -707,8 +711,9 @@ export default function ProjectPage() {
                                     type="text"
                                     value={newTask.tags}
                                     onChange={(e) => setNewTask({ ...newTask, tags: e.target.value })}
-                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-gray-500 transition"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 text-white placeholder-gray-500 transition caret-white"
                                     placeholder="frontend, bug, urgent"
+                                    style={{ color: '#ffffff' }}
                                 />
                             </div>
 
@@ -725,7 +730,7 @@ export default function ProjectPage() {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-xl hover:from-indigo-500 hover:to-purple-500 transition shadow-lg shadow-indigo-500/25"
+                                    className="flex-1 px-4 py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white text-sm font-medium rounded-xl hover:from-cyan-400 hover:to-emerald-400 transition shadow-lg shadow-cyan-500/25"
                                 >
                                     {editingTask ? 'Update Task' : 'Create Task'}
                                 </button>
