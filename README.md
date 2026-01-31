@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="screenshots/logo.png" alt="TaskFlow Logo" width="80" height="80">
+  <img src="task-manager-mern/screenshots/logo.png" alt="TaskFlow Logo" width="80" height="80">
 </p>
 
 <h1 align="center">TaskFlow</h1>
@@ -37,7 +37,7 @@
 The main dashboard features a sleek dark interface with gradient background effects, glassmorphism cards, and real-time statistics.
 
 <p align="center">
-  <img src="screenshots/Dashboard.jpg" alt="Dashboard" width="100%">
+  <img src="task-manager-mern/screenshots/Dashboard.jpg" alt="Dashboard" width="100%">
 </p>
 
 ---
@@ -46,7 +46,7 @@ The main dashboard features a sleek dark interface with gradient background effe
 Beautiful dark-themed authentication with animated gradient background effects and glassmorphism form design.
 
 <p align="center">
-  <img src="screenshots/Login_Page.jpg" alt="Login Page" width="100%">
+  <img src="task-manager-mern/screenshots/Login_Page.jpg" alt="Login Page" width="100%">
 </p>
 
 ---
@@ -55,7 +55,7 @@ Beautiful dark-themed authentication with animated gradient background effects a
 Matching registration interface with real-time password validation and confirmation feedback.
 
 <p align="center">
-  <img src="screenshots/Register_Page.jpg" alt="Register Page" width="100%">
+  <img src="task-manager-mern/screenshots/Register_Page.jpg" alt="Register Page" width="100%">
 </p>
 
 ---
@@ -64,7 +64,7 @@ Matching registration interface with real-time password validation and confirmat
 Create new projects with custom accent colors in a sleek dark modal.
 
 <p align="center">
-  <img src="screenshots/Create Project.jpg" alt="Create Project" width="100%">
+  <img src="task-manager-mern/screenshots/Create Project.jpg" alt="Create Project" width="100%">
 </p>
 
 ---
@@ -73,7 +73,7 @@ Create new projects with custom accent colors in a sleek dark modal.
 Rapidly add tasks to any project with priority and status options.
 
 <p align="center">
-  <img src="screenshots/Task Creation.jpg" alt="Task Creation" width="100%">
+  <img src="task-manager-mern/screenshots/Task Creation.jpg" alt="Task Creation" width="100%">
 </p>
 
 ---
@@ -82,7 +82,7 @@ Rapidly add tasks to any project with priority and status options.
 Track your task progress with visual indicators and statistics.
 
 <p align="center">
-  <img src="screenshots/Progress.jpg" alt="Progress Tracking" width="100%">
+  <img src="task-manager-mern/screenshots/Progress.jpg" alt="Progress Tracking" width="100%">
 </p>
 
 ---
