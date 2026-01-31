@@ -142,13 +142,13 @@ export default function ProjectPage() {
     const getPriorityColor = (priority: string) => {
         switch (priority) {
             case 'high':
-                return 'text-red-700 bg-red-50 border-red-200';
+                return 'text-red-400 bg-red-500/10 border-red-500/20';
             case 'medium':
-                return 'text-amber-700 bg-amber-50 border-amber-200';
+                return 'text-amber-400 bg-amber-500/10 border-amber-500/20';
             case 'low':
-                return 'text-emerald-700 bg-emerald-50 border-emerald-200';
+                return 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20';
             default:
-                return 'text-gray-700 bg-gray-50 border-gray-200';
+                return 'text-gray-400 bg-gray-500/10 border-gray-500/20';
         }
     };
 
@@ -175,22 +175,69 @@ export default function ProjectPage() {
         }
     };
 
+    const getColumnColor = (columnId: string) => {
+        switch (columnId) {
+            case 'todo':
+                return 'from-gray-500/20 to-gray-600/20';
+            case 'in-progress':
+                return 'from-blue-500/20 to-indigo-500/20';
+            case 'completed':
+                return 'from-emerald-500/20 to-green-500/20';
+            default:
+                return 'from-gray-500/20 to-gray-600/20';
+        }
+    };
+
+    const getColumnIcon = (columnId: string) => {
+        switch (columnId) {
+            case 'todo':
+                return (
+                    <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                );
+            case 'in-progress':
+                return (
+                    <svg className="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                );
+            case 'completed':
+                return (
+                    <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                );
+        }
+    };
+
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-[#fafafa]">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+            <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f]">
+                <div className="flex flex-col items-center space-y-4">
+                    <div className="relative">
+                        <div className="w-12 h-12 border-2 border-indigo-500/20 rounded-full"></div>
+                        <div className="absolute top-0 left-0 w-12 h-12 border-2 border-indigo-500 rounded-full border-t-transparent animate-spin"></div>
+                    </div>
+                    <p className="text-gray-400 text-sm">Loading project...</p>
+                </div>
             </div>
         );
     }
 
     if (!project) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-[#fafafa]">
+            <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f]">
                 <div className="text-center">
-                    <p className="text-gray-600">Project not found</p>
+                    <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg className="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M12 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <p className="text-gray-400 mb-4">Project not found</p>
                     <button
                         onClick={() => router.push('/dashboard')}
-                        className="mt-4 text-indigo-600 hover:text-indigo-700"
+                        className="text-indigo-400 hover:text-indigo-300 transition font-medium"
                     >
                         Back to Dashboard
                     </button>
@@ -206,39 +253,50 @@ export default function ProjectPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-[#fafafa] pattern-bg">
+        <div className="min-h-screen bg-[#0a0a0f] relative">
+            {/* Background Effects */}
+            <div className="fixed inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-600/8 rounded-full blur-[150px]"></div>
+                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-600/8 rounded-full blur-[150px]"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[120px]"></div>
+            </div>
+
+            {/* Grid Pattern */}
+            <div className="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none"></div>
+
             <Toaster
                 position="top-right"
                 toastOptions={{
                     style: {
-                        background: '#fff',
-                        color: '#111827',
-                        border: '1px solid #e5e7eb',
+                        background: 'rgba(17, 17, 27, 0.95)',
+                        color: '#fff',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        backdropFilter: 'blur(12px)',
                     },
                 }}
             />
 
             {/* Header */}
-            <div className="bg-white border-b border-gray-200">
-                <div className="max-w-[1600px] mx-auto px-6 lg:px-8 py-6">
+            <div className="relative z-10 border-b border-white/5 bg-white/[0.02] backdrop-blur-xl">
+                <div className="max-w-[1600px] mx-auto px-6 lg:px-8 py-5">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
                             <button
                                 onClick={() => router.push('/dashboard')}
-                                className="text-gray-600 hover:text-gray-900 transition"
+                                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition"
                             >
-                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                 </svg>
                             </button>
                             <div>
                                 <div className="flex items-center space-x-3">
                                     <div
-                                        className="w-8 h-8 rounded-lg flex items-center justify-center"
-                                        style={{ backgroundColor: project.color + '15' }}
+                                        className="w-10 h-10 rounded-xl flex items-center justify-center"
+                                        style={{ backgroundColor: project.color + '20' }}
                                     >
                                         <svg
-                                            className="w-4 h-4"
+                                            className="w-5 h-5"
                                             style={{ color: project.color }}
                                             fill="none"
                                             viewBox="0 0 24 24"
@@ -247,28 +305,30 @@ export default function ProjectPage() {
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
                                         </svg>
                                     </div>
-                                    <h1 className="text-2xl font-semibold text-gray-900">{project.name}</h1>
-                                    <span className={`px-2.5 py-0.5 text-xs font-medium rounded-md ${project.status === 'active'
-                                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                                        : 'bg-gray-100 text-gray-700 border border-gray-200'
+                                    <div>
+                                        <h1 className="text-xl font-semibold text-white">{project.name}</h1>
+                                        {project.description && (
+                                            <p className="text-sm text-gray-400 mt-0.5">{project.description}</p>
+                                        )}
+                                    </div>
+                                    <span className={`px-2.5 py-1 text-xs font-medium rounded-lg ${project.status === 'active'
+                                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                                        : 'bg-gray-500/10 text-gray-400 border border-gray-500/20'
                                         }`}>
                                         {project.status}
                                     </span>
                                 </div>
-                                {project.description && (
-                                    <p className="text-sm text-gray-600 mt-1">{project.description}</p>
-                                )}
                             </div>
                         </div>
 
                         <div className="flex items-center space-x-3">
                             {/* View Toggle */}
-                            <div className="flex items-center bg-gray-100 rounded-lg p-1">
+                            <div className="flex items-center bg-white/5 rounded-xl p-1 border border-white/5">
                                 <button
                                     onClick={() => setViewMode('board')}
-                                    className={`px-3 py-1.5 text-sm font-medium rounded-md transition ${viewMode === 'board'
-                                        ? 'bg-white text-gray-900 shadow-sm'
-                                        : 'text-gray-600 hover:text-gray-900'
+                                    className={`p-2 rounded-lg transition ${viewMode === 'board'
+                                        ? 'bg-white/10 text-white'
+                                        : 'text-gray-500 hover:text-gray-300'
                                         }`}
                                 >
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -277,9 +337,9 @@ export default function ProjectPage() {
                                 </button>
                                 <button
                                     onClick={() => setViewMode('list')}
-                                    className={`px-3 py-1.5 text-sm font-medium rounded-md transition ${viewMode === 'list'
-                                        ? 'bg-white text-gray-900 shadow-sm'
-                                        : 'text-gray-600 hover:text-gray-900'
+                                    className={`p-2 rounded-lg transition ${viewMode === 'list'
+                                        ? 'bg-white/10 text-white'
+                                        : 'text-gray-500 hover:text-gray-300'
                                         }`}
                                 >
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -300,7 +360,7 @@ export default function ProjectPage() {
                                     });
                                     setShowModal(true);
                                 }}
-                                className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition flex items-center space-x-2"
+                                className="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-xl hover:from-indigo-500 hover:to-purple-500 transition shadow-lg shadow-indigo-500/25 flex items-center space-x-2"
                             >
                                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -314,7 +374,7 @@ export default function ProjectPage() {
 
             {/* Board View */}
             {viewMode === 'board' ? (
-                <div className="max-w-[1600px] mx-auto px-6 lg:px-8 py-8">
+                <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-8 py-8">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         {columns.map((column) => {
                             const columnTasks = getTasksByStatus(column.id as any);
@@ -322,31 +382,37 @@ export default function ProjectPage() {
                             return (
                                 <div key={column.id} className="flex flex-col">
                                     {/* Column Header */}
-                                    <div className="flex items-center justify-between mb-4">
+                                    <div className={`flex items-center justify-between mb-4 p-3 rounded-xl bg-gradient-to-r ${getColumnColor(column.id)} border border-white/5`}>
                                         <div className="flex items-center space-x-2">
-                                            <h3 className="text-sm font-semibold text-gray-900">{column.title}</h3>
-                                            <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">
-                                                {column.count}
-                                            </span>
+                                            {getColumnIcon(column.id)}
+                                            <h3 className="text-sm font-semibold text-white">{column.title}</h3>
                                         </div>
+                                        <span className="px-2.5 py-1 bg-white/10 text-gray-300 text-xs font-medium rounded-lg">
+                                            {column.count}
+                                        </span>
                                     </div>
 
                                     {/* Tasks */}
-                                    <div className="space-y-3">
+                                    <div className="space-y-3 flex-1">
                                         {columnTasks.length === 0 ? (
-                                            <div className="bg-white border-2 border-dashed border-gray-200 rounded-lg p-8 text-center">
+                                            <div className="bg-white/[0.02] border border-dashed border-white/10 rounded-xl p-8 text-center">
+                                                <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                                    <svg className="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                                    </svg>
+                                                </div>
                                                 <p className="text-sm text-gray-500">No tasks yet</p>
                                             </div>
                                         ) : (
                                             columnTasks.map((task) => (
                                                 <div
                                                     key={task._id}
-                                                    className="group bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition cursor-pointer"
+                                                    className="group bg-white/[0.03] backdrop-blur-sm border border-white/5 rounded-xl p-4 hover:bg-white/[0.05] hover:border-white/10 transition cursor-pointer"
                                                     onClick={() => handleEditTask(task)}
                                                 >
                                                     {/* Task Header */}
                                                     <div className="flex items-start justify-between mb-2">
-                                                        <h4 className="text-sm font-medium text-gray-900 flex-1 pr-2">
+                                                        <h4 className="text-sm font-medium text-white flex-1 pr-2">
                                                             {task.title}
                                                         </h4>
                                                         <button
@@ -354,7 +420,7 @@ export default function ProjectPage() {
                                                                 e.stopPropagation();
                                                                 handleDeleteTask(task._id);
                                                             }}
-                                                            className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-600 transition"
+                                                            className="opacity-0 group-hover:opacity-100 text-gray-500 hover:text-red-400 transition p-1 rounded-lg hover:bg-red-500/10"
                                                         >
                                                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -364,7 +430,7 @@ export default function ProjectPage() {
 
                                                     {/* Task Description */}
                                                     {task.description && (
-                                                        <p className="text-xs text-gray-600 mb-3 line-clamp-2">
+                                                        <p className="text-xs text-gray-400 mb-3 line-clamp-2">
                                                             {task.description}
                                                         </p>
                                                     )}
@@ -375,7 +441,7 @@ export default function ProjectPage() {
                                                             {task.tags.map((tag, idx) => (
                                                                 <span
                                                                     key={idx}
-                                                                    className="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded-md"
+                                                                    className="px-2 py-0.5 bg-white/5 text-gray-400 text-xs rounded-md border border-white/5"
                                                                 >
                                                                     {tag}
                                                                 </span>
@@ -385,20 +451,20 @@ export default function ProjectPage() {
 
                                                     {/* Task Footer */}
                                                     <div className="flex items-center justify-between">
-                                                        <div className={`flex items-center space-x-1 px-2 py-1 text-xs font-medium rounded-md border ${getPriorityColor(task.priority)}`}>
+                                                        <div className={`flex items-center space-x-1 px-2 py-1 text-xs font-medium rounded-lg border ${getPriorityColor(task.priority)}`}>
                                                             {getPriorityIcon(task.priority)}
                                                             <span className="capitalize">{task.priority}</span>
                                                         </div>
 
                                                         {/* Quick Actions */}
-                                                        <div className="flex items-center space-x-1">
+                                                        <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition">
                                                             {column.id === 'todo' && (
                                                                 <button
                                                                     onClick={(e) => {
                                                                         e.stopPropagation();
                                                                         handleUpdateTaskStatus(task._id, 'in-progress');
                                                                     }}
-                                                                    className="px-2 py-1 text-xs text-indigo-600 hover:bg-indigo-50 rounded transition"
+                                                                    className="px-2 py-1 text-xs text-blue-400 hover:bg-blue-500/10 rounded-lg transition"
                                                                 >
                                                                     Start
                                                                 </button>
@@ -410,7 +476,7 @@ export default function ProjectPage() {
                                                                             e.stopPropagation();
                                                                             handleUpdateTaskStatus(task._id, 'todo');
                                                                         }}
-                                                                        className="px-2 py-1 text-xs text-gray-600 hover:bg-gray-50 rounded transition"
+                                                                        className="px-2 py-1 text-xs text-gray-400 hover:bg-white/5 rounded-lg transition"
                                                                     >
                                                                         Back
                                                                     </button>
@@ -419,7 +485,7 @@ export default function ProjectPage() {
                                                                             e.stopPropagation();
                                                                             handleUpdateTaskStatus(task._id, 'completed');
                                                                         }}
-                                                                        className="px-2 py-1 text-xs text-emerald-600 hover:bg-emerald-50 rounded transition"
+                                                                        className="px-2 py-1 text-xs text-emerald-400 hover:bg-emerald-500/10 rounded-lg transition"
                                                                     >
                                                                         Done
                                                                     </button>
@@ -431,7 +497,7 @@ export default function ProjectPage() {
                                                                         e.stopPropagation();
                                                                         handleUpdateTaskStatus(task._id, 'in-progress');
                                                                     }}
-                                                                    className="px-2 py-1 text-xs text-indigo-600 hover:bg-indigo-50 rounded transition"
+                                                                    className="px-2 py-1 text-xs text-indigo-400 hover:bg-indigo-500/10 rounded-lg transition"
                                                                 >
                                                                     Reopen
                                                                 </button>
@@ -449,82 +515,95 @@ export default function ProjectPage() {
                 </div>
             ) : (
                 /* List View */
-                <div className="max-w-[1600px] mx-auto px-6 lg:px-8 py-8">
-                    <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-8 py-8">
+                    <div className="bg-white/[0.02] backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden">
                         <table className="w-full">
-                            <thead className="bg-gray-50 border-b border-gray-200">
+                            <thead className="bg-white/[0.02] border-b border-white/5">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                                         Task
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                                         Status
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                                         Priority
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                                         Tags
                                     </th>
-                                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">
                                         Actions
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200">
-                                {tasks.map((task) => (
-                                    <tr key={task._id} className="hover:bg-gray-50 transition">
-                                        <td className="px-6 py-4">
-                                            <div
-                                                className="cursor-pointer"
-                                                onClick={() => handleEditTask(task)}
-                                            >
-                                                <p className="text-sm font-medium text-gray-900">{task.title}</p>
-                                                {task.description && (
-                                                    <p className="text-xs text-gray-500 mt-1 line-clamp-1">{task.description}</p>
-                                                )}
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <span className={`px-2.5 py-1 text-xs font-medium rounded-md ${task.status === 'completed'
-                                                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                                                : task.status === 'in-progress'
-                                                    ? 'bg-blue-50 text-blue-700 border border-blue-200'
-                                                    : 'bg-gray-100 text-gray-700 border border-gray-200'
-                                                }`}>
-                                                {task.status === 'in-progress' ? 'In Progress' : task.status === 'todo' ? 'To Do' : 'Done'}
-                                            </span>
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <div className={`inline-flex items-center space-x-1 px-2 py-1 text-xs font-medium rounded-md border ${getPriorityColor(task.priority)}`}>
-                                                {getPriorityIcon(task.priority)}
-                                                <span className="capitalize">{task.priority}</span>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <div className="flex flex-wrap gap-1">
-                                                {task.tags?.map((tag, idx) => (
-                                                    <span
-                                                        key={idx}
-                                                        className="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded-md"
-                                                    >
-                                                        {tag}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 text-right">
-                                            <button
-                                                onClick={() => handleDeleteTask(task._id)}
-                                                className="text-gray-400 hover:text-red-600 transition"
-                                            >
-                                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            <tbody className="divide-y divide-white/5">
+                                {tasks.length === 0 ? (
+                                    <tr>
+                                        <td colSpan={5} className="px-6 py-12 text-center">
+                                            <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                                <svg className="w-8 h-8 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                                 </svg>
-                                            </button>
+                                            </div>
+                                            <p className="text-gray-400">No tasks yet. Create your first task!</p>
                                         </td>
                                     </tr>
-                                ))}
+                                ) : (
+                                    tasks.map((task) => (
+                                        <tr key={task._id} className="hover:bg-white/[0.02] transition">
+                                            <td className="px-6 py-4">
+                                                <div
+                                                    className="cursor-pointer"
+                                                    onClick={() => handleEditTask(task)}
+                                                >
+                                                    <p className="text-sm font-medium text-white">{task.title}</p>
+                                                    {task.description && (
+                                                        <p className="text-xs text-gray-500 mt-1 line-clamp-1">{task.description}</p>
+                                                    )}
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <span className={`px-2.5 py-1 text-xs font-medium rounded-lg ${task.status === 'completed'
+                                                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                                                    : task.status === 'in-progress'
+                                                        ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                                                        : 'bg-gray-500/10 text-gray-400 border border-gray-500/20'
+                                                    }`}>
+                                                    {task.status === 'in-progress' ? 'In Progress' : task.status === 'todo' ? 'To Do' : 'Done'}
+                                                </span>
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <div className={`inline-flex items-center space-x-1 px-2 py-1 text-xs font-medium rounded-lg border ${getPriorityColor(task.priority)}`}>
+                                                    {getPriorityIcon(task.priority)}
+                                                    <span className="capitalize">{task.priority}</span>
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <div className="flex flex-wrap gap-1">
+                                                    {task.tags?.map((tag, idx) => (
+                                                        <span
+                                                            key={idx}
+                                                            className="px-2 py-0.5 bg-white/5 text-gray-400 text-xs rounded-md border border-white/5"
+                                                        >
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-4 text-right">
+                                                <button
+                                                    onClick={() => handleDeleteTask(task._id)}
+                                                    className="text-gray-500 hover:text-red-400 transition p-2 rounded-lg hover:bg-red-500/10"
+                                                >
+                                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
                             </tbody>
                         </table>
                     </div>
@@ -533,48 +612,55 @@ export default function ProjectPage() {
 
             {/* Task Modal */}
             {showModal && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-xl p-6 max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto">
-                        <div className="flex items-center justify-between mb-5">
-                            <h2 className="text-xl font-semibold text-gray-900">
-                                {editingTask ? 'Edit Task' : 'Create Task'}
-                            </h2>
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div className="bg-[#12121a] border border-white/10 rounded-2xl p-6 max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+                        <div className="flex items-center justify-between mb-6">
+                            <div className="flex items-center space-x-3">
+                                <div className="w-10 h-10 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl flex items-center justify-center">
+                                    <svg className="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                                    </svg>
+                                </div>
+                                <h2 className="text-lg font-semibold text-white">
+                                    {editingTask ? 'Edit Task' : 'Create Task'}
+                                </h2>
+                            </div>
                             <button
                                 onClick={() => {
                                     setShowModal(false);
                                     setEditingTask(null);
                                 }}
-                                className="text-gray-400 hover:text-gray-600"
+                                className="text-gray-500 hover:text-gray-300 p-2 rounded-xl hover:bg-white/5 transition"
                             >
-                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
                         </div>
 
-                        <form onSubmit={editingTask ? handleUpdateTask : handleCreateTask} className="space-y-4">
+                        <form onSubmit={editingTask ? handleUpdateTask : handleCreateTask} className="space-y-5">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                                <label className="block text-sm font-medium text-gray-300 mb-2">
                                     Title
                                 </label>
                                 <input
                                     type="text"
                                     value={newTask.title}
                                     onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 bg-white"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-gray-500 transition"
                                     placeholder="Enter task title"
                                     required
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                                <label className="block text-sm font-medium text-gray-300 mb-2">
                                     Description
                                 </label>
                                 <textarea
                                     value={newTask.description}
                                     onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 bg-white"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-gray-500 transition resize-none"
                                     placeholder="Add task description..."
                                     rows={3}
                                 />
@@ -582,38 +668,38 @@ export default function ProjectPage() {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                                    <label className="block text-sm font-medium text-gray-300 mb-2">
                                         Status
                                     </label>
                                     <select
                                         value={newTask.status}
                                         onChange={(e) => setNewTask({ ...newTask, status: e.target.value as any })}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 bg-white"
+                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white transition appearance-none cursor-pointer"
                                     >
-                                        <option value="todo">To Do</option>
-                                        <option value="in-progress">In Progress</option>
-                                        <option value="completed">Done</option>
+                                        <option value="todo" className="bg-[#12121a]">To Do</option>
+                                        <option value="in-progress" className="bg-[#12121a]">In Progress</option>
+                                        <option value="completed" className="bg-[#12121a]">Done</option>
                                     </select>
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                                    <label className="block text-sm font-medium text-gray-300 mb-2">
                                         Priority
                                     </label>
                                     <select
                                         value={newTask.priority}
                                         onChange={(e) => setNewTask({ ...newTask, priority: e.target.value as any })}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 bg-white"
+                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white transition appearance-none cursor-pointer"
                                     >
-                                        <option value="low">Low</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="high">High</option>
+                                        <option value="low" className="bg-[#12121a]">Low</option>
+                                        <option value="medium" className="bg-[#12121a]">Medium</option>
+                                        <option value="high" className="bg-[#12121a]">High</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                                <label className="block text-sm font-medium text-gray-300 mb-2">
                                     Tags
                                     <span className="text-xs text-gray-500 ml-2">(comma separated)</span>
                                 </label>
@@ -621,7 +707,7 @@ export default function ProjectPage() {
                                     type="text"
                                     value={newTask.tags}
                                     onChange={(e) => setNewTask({ ...newTask, tags: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 bg-white"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-gray-500 transition"
                                     placeholder="frontend, bug, urgent"
                                 />
                             </div>
@@ -633,13 +719,13 @@ export default function ProjectPage() {
                                         setShowModal(false);
                                         setEditingTask(null);
                                     }}
-                                    className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition"
+                                    className="flex-1 px-4 py-3 border border-white/10 text-gray-300 text-sm font-medium rounded-xl hover:bg-white/5 transition"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition"
+                                    className="flex-1 px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-xl hover:from-indigo-500 hover:to-purple-500 transition shadow-lg shadow-indigo-500/25"
                                 >
                                     {editingTask ? 'Update Task' : 'Create Task'}
                                 </button>
