@@ -5,7 +5,7 @@
 <h1 align="center">TaskFlow</h1>
 
 <p align="center">
-  A modern, minimal task management application built with the MERN stack.
+  A modern task management application with a stunning dark UI, built with the MERN stack.
 </p>
 
 <p align="center">
@@ -20,8 +20,13 @@
 <p align="center">
   <a href="#screenshots">View Screenshots</a> •
   <a href="#features">Features</a> •
+  <a href="#design">Design</a> •
   <a href="#getting-started">Getting Started</a> •
   <a href="#deployment">Deployment</a>
+</p>
+
+<p align="center">
+  <strong>Live Demo:</strong> <a href="https://frontend-bay-tau-52.vercel.app">https://frontend-bay-tau-52.vercel.app</a>
 </p>
 
 ---
@@ -29,81 +34,55 @@
 ## Screenshots
 
 ### Dashboard
-The main dashboard displays all your projects with real-time statistics, quick actions, and recent tasks.
+The main dashboard features a sleek dark interface with gradient background effects, glassmorphism cards, and real-time statistics.
 
 <p align="center">
-  <img src="screenshots/dashboard.png" alt="Dashboard" width="100%">
+  <img src="screenshots/Dashboard.jpg" alt="Dashboard" width="100%">
 </p>
-
-**Key Features:**
-- Personalized greeting based on time of day
-- Task statistics (Total, In Progress, Completed, Progress %)
-- Quick Actions panel for rapid project/task creation
-- Recent Tasks list
-- Grid/List view toggle
-- Search functionality
 
 ---
 
 ### Login Page
-Clean, minimal authentication interface focused on simplicity.
+Beautiful dark-themed authentication with animated gradient background effects and glassmorphism form design.
 
 <p align="center">
-  <img src="screenshots/login.png" alt="Login Page" width="400">
+  <img src="screenshots/Login_Page.jpg" alt="Login Page" width="100%">
 </p>
 
 ---
 
 ### Register Page
-Simple registration form with password validation.
+Matching registration interface with real-time password validation and confirmation feedback.
 
 <p align="center">
-  <img src="screenshots/register.png" alt="Register Page" width="400">
+  <img src="screenshots/Register_Page.jpg" alt="Register Page" width="100%">
 </p>
 
 ---
 
-### Project Board (Kanban)
-Organize tasks with a drag-and-drop Kanban board interface.
+### Create Project
+Create new projects with custom accent colors in a sleek dark modal.
 
 <p align="center">
-  <img src="screenshots/kanban.png" alt="Project Kanban Board" width="100%">
-</p>
-
-**Features:**
-- Three columns: To Do, In Progress, Completed
-- Drag and drop tasks between columns
-- Add new tasks quickly
-- Edit task details
-- Priority indicators
-
----
-
-### Create Project Modal
-Easily create new projects with custom colors.
-
-<p align="center">
-  <img src="screenshots/create-project.png" alt="Create Project Modal" width="400">
+  <img src="screenshots/Create Project.jpg" alt="Create Project" width="100%">
 </p>
 
 ---
 
-### Quick Task Modal
-Rapidly add tasks to any project from the dashboard.
+### Task Creation
+Rapidly add tasks to any project with priority and status options.
 
 <p align="center">
-  <img src="screenshots/quick-task.png" alt="Quick Task Modal" width="400">
+  <img src="screenshots/Task Creation.jpg" alt="Task Creation" width="100%">
 </p>
 
 ---
 
-### Mobile Responsive
-Fully responsive design that works on all devices.
+### Progress Tracking
+Track your task progress with visual indicators and statistics.
 
 <p align="center">
-  <img src="screenshots/mobile-dashboard.png" alt="Mobile Dashboard" width="300">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="screenshots/mobile-login.png" alt="Mobile Login" width="300">
+  <img src="screenshots/Progress.jpg" alt="Progress Tracking" width="100%">
 </p>
 
 ---
@@ -116,11 +95,35 @@ Fully responsive design that works on all devices.
 | 📁 **Projects** | Create, edit, delete projects with custom colors |
 | ✅ **Tasks** | Full CRUD with status & priority tracking |
 | 📊 **Dashboard** | Real-time statistics and progress tracking |
-| 🎯 **Kanban Board** | Drag-and-drop task management |
+| 🎯 **Kanban Board** | Visual task management with status columns |
 | ⚡ **Quick Actions** | Rapidly create tasks from dashboard |
 | 🔍 **Search** | Find projects and tasks quickly |
 | 📱 **Responsive** | Works on desktop, tablet, and mobile |
-| 🎨 **Minimal Design** | Clean, neutral color scheme |
+| 🌙 **Dark Theme** | Modern dark UI with gradient accents |
+| ✨ **Glassmorphism** | Beautiful frosted glass card effects |
+
+---
+
+## Design
+
+TaskFlow features a modern dark theme with carefully crafted visual elements:
+
+### Color Palette
+| Element | Color |
+|---------|-------|
+| Background | `#0a0a0f` (Deep Dark) |
+| Cards | `rgba(255,255,255,0.03)` with backdrop blur |
+| Primary Accent | Indigo-Purple Gradient |
+| Success | Emerald `#10b981` |
+| Warning | Amber `#f59e0b` |
+| Error | Red `#ef4444` |
+
+### Visual Effects
+- **Gradient Blur Orbs** - Animated background effects
+- **Grid Pattern** - Subtle overlay texture
+- **Glassmorphism** - Frosted glass cards with `backdrop-blur`
+- **Glow Shadows** - Colored shadows on interactive elements
+- **Smooth Transitions** - 200ms ease transitions throughout
 
 ---
 
@@ -158,9 +161,10 @@ Fully responsive design that works on all devices.
 ### Frontend
 - **Next.js 16** - React framework with App Router
 - **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first styling
+- **Tailwind CSS** - Utility-first styling with custom dark theme
 - **Axios** - HTTP client
 - **js-cookie** - Cookie management
+- **react-hot-toast** - Beautiful toast notifications
 
 ### Backend
 - **Express.js** - Node.js web framework
@@ -251,10 +255,10 @@ task-manager-mern/
 │
 ├── frontend/
 │   ├── app/
-│   │   ├── login/      # Login page
-│   │   ├── register/   # Registration page
-│   │   ├── dashboard/  # Main dashboard
-│   │   └── project/    # Project details & Kanban
+│   │   ├── login/      # Login page (dark theme)
+│   │   ├── register/   # Registration page (dark theme)
+│   │   ├── dashboard/  # Main dashboard (dark theme)
+│   │   └── project/    # Project details & Kanban (dark theme)
 │   ├── context/        # React Context (Auth)
 │   └── lib/            # API client & types
 │
