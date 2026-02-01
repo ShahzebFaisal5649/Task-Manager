@@ -21,7 +21,15 @@ export default function LoginPage() {
         try {
             await login(email, password);
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Invalid email or password');
+            if (err.response?.data?.message) {
+                setError(err.response.data.message);
+            } else if (err.code === 'ERR_NETWORK') {
+                setError('Network error. Please check your connection and try again.');
+            } else if (err.message) {
+                setError(err.message);
+            } else {
+                setError('Invalid email or password');
+            }
         } finally {
             setLoading(false);
         }

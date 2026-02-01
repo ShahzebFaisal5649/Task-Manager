@@ -34,7 +34,15 @@ export default function RegisterPage() {
         try {
             await register(name, email, password);
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Registration failed');
+            if (err.response?.data?.message) {
+                setError(err.response.data.message);
+            } else if (err.code === 'ERR_NETWORK') {
+                setError('Network error. Please check your connection and try again.');
+            } else if (err.message) {
+                setError(err.message);
+            } else {
+                setError('Registration failed. Please try again.');
+            }
         } finally {
             setLoading(false);
         }

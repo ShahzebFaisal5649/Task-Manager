@@ -1,13 +1,15 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 const api = axios.create({
     baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
     },
+    timeout: 30000, // 30 second timeout for mobile connections
+    withCredentials: false, // Avoid CORS issues with credentials
 });
 
 api.interceptors.request.use((config) => {
@@ -17,6 +19,17 @@ api.interceptors.request.use((config) => {
     }
     return config;
 });
+
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        // Handle network errors gracefully
+        if (!error.response) {
+            error.message = 'Network error. Please check your connection.';
+        }
+        return Promise.reject(error);
+    }
+);
 
 export const authAPI = {
     register: (data: { name: string; email: string; password: string }) =>

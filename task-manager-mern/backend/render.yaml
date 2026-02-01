@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: task-manager-backend
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+      - key: FRONTEND_URL
+        value: https://frontend-bay-tau-52.vercel.app
