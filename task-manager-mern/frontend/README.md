@@ -1,93 +1,156 @@
-# TaskFlow - Professional Task Management
+# TaskFlow Frontend
 
-A full-stack MERN task management application with Next.js frontend and Express backend.
+A modern task management application built with Next.js 16, featuring serverless API routes and MongoDB integration.
 
-## 🚀 Features
+## Live Demo
 
-- ✅ User Authentication (JWT)
-- ✅ Project Management
-- ✅ Kanban Task Board
-- ✅ List/Board View Toggle
-- ✅ Real-time Statistics
-- ✅ Priority & Status Management
-- ✅ Tags & Filters
-- ✅ Mobile Responsive
-- ✅ Professional UI/UX
+**[https://frontend-bay-tau-52.vercel.app](https://frontend-bay-tau-52.vercel.app)**
 
-## 🛠️ Tech Stack
+## Features
 
-**Frontend:**
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- Axios
-- React Hot Toast
+- User Authentication (JWT-based)
+- Project Management with custom colors
+- Kanban Task Board with drag & drop
+- Real-time Statistics Dashboard
+- Priority & Status Management
+- Mobile Responsive Design
+- Dark Theme with Glassmorphism UI
 
-**Backend:**
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- JWT Authentication
-- bcrypt
+## Tech Stack
 
-## 📦 Installation
+- **Next.js 16** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **Tailwind CSS 4** - Utility-first styling
+- **Mongoose** - MongoDB ODM
+- **JWT** - Authentication
+- **bcryptjs** - Password hashing
+
+## Project Structure
+
+```
+frontend/
+├── app/
+│   ├── api/                    # Serverless API routes
+│   │   ├── auth/
+│   │   │   ├── login/route.ts
+│   │   │   ├── register/route.ts
+│   │   │   └── me/route.ts
+│   │   ├── projects/
+│   │   │   ├── route.ts
+│   │   │   └── [id]/
+│   │   │       ├── route.ts
+│   │   │       └── tasks/route.ts
+│   │   └── tasks/
+│   │       └── [id]/route.ts
+│   ├── dashboard/page.tsx      # Main dashboard
+│   ├── login/page.tsx          # Login page
+│   ├── register/page.tsx       # Registration page
+│   └── project/[id]/page.tsx   # Project detail & Kanban
+├── context/
+│   └── AuthContext.tsx         # Authentication context
+├── lib/
+│   ├── api.ts                  # Axios API client
+│   ├── auth.ts                 # JWT utilities
+│   ├── db.ts                   # MongoDB connection
+│   ├── models/                 # Mongoose models
+│   │   ├── User.ts
+│   │   ├── Project.ts
+│   │   └── Task.ts
+│   └── types.ts                # TypeScript types
+└── public/
+    └── logo.png                # App logo
+```
+
+## Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- MongoDB (local or Atlas)
 
-### Backend Setup
+- Node.js 18+
+- MongoDB (local or cloud)
+
+### Installation
+
 ```bash
-cd backend
+# Install dependencies
 npm install
+
+# Create environment file
+cp .env.example .env.local
+
+# Edit .env.local with your values
 ```
 
-Create `.env` file:
+### Environment Variables
+
+Create a `.env.local` file:
+
 ```env
-PORT=5000
+NEXT_PUBLIC_API_URL=/api
 MONGODB_URI=mongodb://localhost:27017/taskmanager
 JWT_SECRET=your_secret_key_here
-NODE_ENV=development
 ```
 
-Start backend:
+### Development
+
 ```bash
 npm run dev
 ```
 
-### Frontend Setup
+Open [http://localhost:3000](http://localhost:3000)
+
+### Build
+
 ```bash
-cd frontend
-npm install
-npm run dev
+npm run build
+npm start
 ```
 
-## 🌐 Deployment
+## Deployment
 
-### Deploy Backend (Railway/Render)
+### Vercel (Recommended)
 
-1. Create account on Railway.app or Render.com
-2. Connect GitHub repository
-3. Set environment variables
-4. Deploy!
-
-### Deploy Frontend (Vercel)
-
-1. Push code to GitHub
+1. Push to GitHub
 2. Import project in Vercel
-3. Deploy automatically
+3. Set environment variables:
+   - `MONGODB_URI` - Your MongoDB connection string
+   - `JWT_SECRET` - Your secret key
+4. Deploy
 
-## 📱 Screenshots
+### Database Setup
 
-[Add screenshots here]
+**Railway:**
+1. Create MongoDB database at [railway.app](https://railway.app)
+2. Copy `MONGO_PUBLIC_URL`
+3. Add to Vercel environment variables
 
-## 👨‍💻 Author
+**MongoDB Atlas:**
+1. Create cluster at [cloud.mongodb.com](https://cloud.mongodb.com)
+2. Get connection string
+3. Add to Vercel environment variables
 
-Shahzeb Faisal  
-Email: shahzebfaisal5649@gmail.com  
-Location: Lahore, Pakistan
+## API Endpoints
 
-## 📄 License
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register user |
+| POST | `/api/auth/login` | Login user |
+| GET | `/api/auth/me` | Get current user |
+| GET | `/api/projects` | Get all projects |
+| POST | `/api/projects` | Create project |
+| GET | `/api/projects/:id` | Get project |
+| PUT | `/api/projects/:id` | Update project |
+| DELETE | `/api/projects/:id` | Delete project |
+| GET | `/api/projects/:id/tasks` | Get tasks |
+| POST | `/api/projects/:id/tasks` | Create task |
+| PUT | `/api/tasks/:id` | Update task |
+| DELETE | `/api/tasks/:id` | Delete task |
 
-MIT License - feel free to use this project!
+## Author
+
+**Shahzeb Faisal**
+- GitHub: [@ShahzebFaisal5649](https://github.com/ShahzebFaisal5649)
+- Email: shahzebfaisal5649@gmail.com
+
+## License
+
+MIT License

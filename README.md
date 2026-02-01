@@ -5,22 +5,21 @@
 <h1 align="center">TaskFlow</h1>
 
 <p align="center">
-  A modern task management application with a stunning dark UI, built with the MERN stack.
+  A modern task management application with a stunning dark UI, built with Next.js and MongoDB.
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Next.js-16-000000?style=for-the-badge&logo=next.js" alt="Next.js">
   <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB">
-  <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express">
-  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js">
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind">
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
 </p>
 
 <p align="center">
   <a href="#screenshots">View Screenshots</a> •
   <a href="#features">Features</a> •
-  <a href="#design">Design</a> •
+  <a href="#tech-stack">Tech Stack</a> •
   <a href="#getting-started">Getting Started</a> •
   <a href="#deployment">Deployment</a>
 </p>
@@ -91,39 +90,17 @@ Track your task progress with visual indicators and statistics.
 
 | Feature | Description |
 |---------|-------------|
-| 🔐 **Authentication** | Secure JWT-based login & registration |
-| 📁 **Projects** | Create, edit, delete projects with custom colors |
-| ✅ **Tasks** | Full CRUD with status & priority tracking |
-| 📊 **Dashboard** | Real-time statistics and progress tracking |
-| 🎯 **Kanban Board** | Visual task management with status columns |
-| ⚡ **Quick Actions** | Rapidly create tasks from dashboard |
-| 🔍 **Search** | Find projects and tasks quickly |
-| 📱 **Responsive** | Works on desktop, tablet, and mobile |
-| 🌙 **Dark Theme** | Modern dark UI with gradient accents |
-| ✨ **Glassmorphism** | Beautiful frosted glass card effects |
-
----
-
-## Design
-
-TaskFlow features a modern dark theme with carefully crafted visual elements:
-
-### Color Palette
-| Element | Color |
-|---------|-------|
-| Background | `#0a0a0f` (Deep Dark) |
-| Cards | `rgba(255,255,255,0.03)` with backdrop blur |
-| Primary Accent | Indigo-Purple Gradient |
-| Success | Emerald `#10b981` |
-| Warning | Amber `#f59e0b` |
-| Error | Red `#ef4444` |
-
-### Visual Effects
-- **Gradient Blur Orbs** - Animated background effects
-- **Grid Pattern** - Subtle overlay texture
-- **Glassmorphism** - Frosted glass cards with `backdrop-blur`
-- **Glow Shadows** - Colored shadows on interactive elements
-- **Smooth Transitions** - 200ms ease transitions throughout
+| **Authentication** | Secure JWT-based login & registration |
+| **Projects** | Create, edit, delete projects with custom colors |
+| **Tasks** | Full CRUD with status & priority tracking |
+| **Dashboard** | Real-time statistics and progress tracking |
+| **Kanban Board** | Visual task management with status columns |
+| **Quick Actions** | Rapidly create tasks from dashboard |
+| **Search** | Find projects and tasks quickly |
+| **Responsive** | Works on desktop, tablet, and mobile |
+| **Dark Theme** | Modern dark UI with gradient accents |
+| **Glassmorphism** | Beautiful frosted glass card effects |
+| **Serverless** | Deployed on Vercel with serverless API routes |
 
 ---
 
@@ -144,34 +121,56 @@ TaskFlow features a modern dark theme with carefully crafted visual elements:
       <br>Tailwind
     </td>
     <td align="center" width="96">
-      <img src="https://skillicons.dev/icons?i=express" width="48" height="48" alt="Express" />
-      <br>Express
-    </td>
-    <td align="center" width="96">
       <img src="https://skillicons.dev/icons?i=mongodb" width="48" height="48" alt="MongoDB" />
       <br>MongoDB
     </td>
     <td align="center" width="96">
-      <img src="https://skillicons.dev/icons?i=nodejs" width="48" height="48" alt="Node.js" />
-      <br>Node.js
+      <img src="https://skillicons.dev/icons?i=vercel" width="48" height="48" alt="Vercel" />
+      <br>Vercel
     </td>
   </tr>
 </table>
 
-### Frontend
-- **Next.js 16** - React framework with App Router
+### Frontend & API
+- **Next.js 16** - React framework with App Router & API Routes
 - **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first styling with custom dark theme
-- **Axios** - HTTP client
-- **js-cookie** - Cookie management
-- **react-hot-toast** - Beautiful toast notifications
-
-### Backend
-- **Express.js** - Node.js web framework
-- **MongoDB** - NoSQL database
-- **Mongoose** - MongoDB ODM
+- **Tailwind CSS 4** - Utility-first styling with custom dark theme
+- **Mongoose** - MongoDB ODM for serverless functions
 - **JWT** - JSON Web Token authentication
 - **bcryptjs** - Password hashing
+- **Axios** - HTTP client
+- **js-cookie** - Cookie management
+
+### Database
+- **MongoDB** - NoSQL database (hosted on Railway)
+
+### Deployment
+- **Vercel** - Frontend & serverless API hosting
+- **Railway** - MongoDB database hosting
+
+---
+
+## Architecture
+
+This project uses a **serverless architecture** with Next.js API routes:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                      Vercel                              │
+│  ┌─────────────────┐    ┌─────────────────────────────┐ │
+│  │   Next.js App   │    │   Serverless API Routes     │ │
+│  │   (Frontend)    │───▶│   /api/auth/*               │ │
+│  │                 │    │   /api/projects/*           │ │
+│  │                 │    │   /api/tasks/*              │ │
+│  └─────────────────┘    └──────────────┬──────────────┘ │
+└────────────────────────────────────────┼────────────────┘
+                                         │
+                                         ▼
+                            ┌─────────────────────────┐
+                            │   Railway MongoDB       │
+                            │   (Database)            │
+                            └─────────────────────────┘
+```
 
 ---
 
@@ -180,62 +179,42 @@ TaskFlow features a modern dark theme with carefully crafted visual elements:
 ### Prerequisites
 
 - Node.js 18+
-- MongoDB (local or Atlas)
+- MongoDB (local or Railway/Atlas)
 - npm or yarn
 
-### Installation
+### Local Development
 
 1. **Clone the repository**
    ```bash
    git clone https://github.com/ShahzebFaisal5649/Task-Manager.git
-   cd Task-Manager/task-manager-mern
+   cd Task-Manager/task-manager-mern/frontend
    ```
 
-2. **Install backend dependencies**
+2. **Install dependencies**
    ```bash
-   cd backend
    npm install
    ```
 
-3. **Install frontend dependencies**
-   ```bash
-   cd ../frontend
-   npm install
-   ```
+3. **Configure environment variables**
 
-4. **Configure environment variables**
-
-   Backend (`backend/.env`):
+   Create `frontend/.env.local`:
    ```env
-   PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/taskflow
+   NEXT_PUBLIC_API_URL=/api
+   MONGODB_URI=mongodb://localhost:27017/taskmanager
    JWT_SECRET=your_secret_key_here
-   NODE_ENV=development
    ```
 
-   Frontend (`frontend/.env.local`):
-   ```env
-   NEXT_PUBLIC_API_URL=http://localhost:5000/api
-   ```
-
-5. **Start MongoDB** (if running locally)
+4. **Start MongoDB** (if running locally)
    ```bash
    mongod
    ```
 
-6. **Run the backend**
+5. **Run the development server**
    ```bash
-   cd backend
    npm run dev
    ```
 
-7. **Run the frontend** (new terminal)
-   ```bash
-   cd frontend
-   npm run dev
-   ```
-
-8. **Open the app**
+6. **Open the app**
 
    Visit [http://localhost:3000](http://localhost:3000)
 
@@ -245,24 +224,27 @@ TaskFlow features a modern dark theme with carefully crafted visual elements:
 
 ```
 task-manager-mern/
-├── backend/
-│   ├── config/         # Database configuration
-│   ├── controllers/    # Route controllers
-│   ├── middleware/     # Auth middleware
-│   ├── models/         # Mongoose models
-│   ├── routes/         # API routes
-│   └── server.js       # Express app
-│
 ├── frontend/
 │   ├── app/
-│   │   ├── login/      # Login page (dark theme)
-│   │   ├── register/   # Registration page (dark theme)
-│   │   ├── dashboard/  # Main dashboard (dark theme)
-│   │   └── project/    # Project details & Kanban (dark theme)
-│   ├── context/        # React Context (Auth)
-│   └── lib/            # API client & types
+│   │   ├── api/              # Serverless API routes
+│   │   │   ├── auth/         # Authentication endpoints
+│   │   │   ├── projects/     # Project CRUD endpoints
+│   │   │   └── tasks/        # Task CRUD endpoints
+│   │   ├── login/            # Login page
+│   │   ├── register/         # Registration page
+│   │   ├── dashboard/        # Main dashboard
+│   │   └── project/          # Project details & Kanban
+│   ├── context/              # React Context (Auth)
+│   └── lib/
+│       ├── api.ts            # API client
+│       ├── auth.ts           # JWT utilities
+│       ├── db.ts             # MongoDB connection
+│       ├── models/           # Mongoose models
+│       └── types.ts          # TypeScript types
 │
-└── screenshots/        # App screenshots
+├── backend/                  # Legacy Express backend (optional)
+│
+└── screenshots/              # App screenshots
 ```
 
 ---
@@ -297,25 +279,46 @@ task-manager-mern/
 
 ## Deployment
 
-### Backend (Railway/Render)
+### Deploy to Vercel (Recommended)
 
-1. Push code to GitHub
-2. Connect to [Railway](https://railway.app) or [Render](https://render.com)
-3. Set environment variables:
-   - `MONGODB_URI` - Your MongoDB Atlas connection string
-   - `JWT_SECRET` - Your secret key
-   - `NODE_ENV` - `production`
-4. Deploy
+1. **Push code to GitHub**
 
-### Frontend (Vercel)
+2. **Import to Vercel**
+   - Go to [vercel.com](https://vercel.com)
+   - Import your GitHub repository
+   - Set root directory to `task-manager-mern/frontend`
 
-1. Import project from GitHub
-2. Set root directory to `task-manager-mern/frontend`
-3. Add environment variable:
-   - `NEXT_PUBLIC_API_URL` - Your deployed backend URL
-4. Deploy
+3. **Set environment variables in Vercel**
+   ```
+   MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/dbname
+   JWT_SECRET=your_secret_key_here
+   ```
 
-**Live Demo:** [https://frontend-bay-tau-52.vercel.app](https://frontend-bay-tau-52.vercel.app)
+4. **Deploy!**
+
+### Database Options
+
+**Railway (Recommended)**
+1. Create account at [railway.app](https://railway.app)
+2. Add MongoDB database
+3. Copy the `MONGO_PUBLIC_URL`
+4. Add to Vercel environment variables
+
+**MongoDB Atlas**
+1. Create account at [cloud.mongodb.com](https://cloud.mongodb.com)
+2. Create free M0 cluster
+3. Get connection string
+4. Add to Vercel environment variables
+
+---
+
+## Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `MONGODB_URI` | MongoDB connection string | Yes |
+| `JWT_SECRET` | Secret key for JWT tokens | Yes |
+| `NEXT_PUBLIC_API_URL` | API base URL (use `/api` for production) | No |
 
 ---
 
