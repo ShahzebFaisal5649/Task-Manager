@@ -23,7 +23,9 @@ export default function ProjectPage() {
         priority: 'medium' as 'low' | 'medium' | 'high',
         status: 'todo' as 'todo' | 'in-progress' | 'completed',
         tags: '',
+        subtasks: [] as { title: string; completed: boolean }[],
     });
+    const [isGeneratingAI, setIsGeneratingAI] = useState(false);
 
     useEffect(() => {
         if (params.id) {
@@ -58,6 +60,7 @@ export default function ProjectPage() {
             const taskData = {
                 ...newTask,
                 tags: newTask.tags ? newTask.tags.split(',').map(t => t.trim()) : [],
+                subtasks: newTask.subtasks,
             };
             await taskAPI.create(params.id as string, taskData);
             setShowModal(false);
@@ -67,6 +70,7 @@ export default function ProjectPage() {
                 priority: 'medium',
                 status: 'todo',
                 tags: '',
+                subtasks: [],
             });
             fetchTasks();
             toast.success('Task created successfully');
@@ -83,6 +87,7 @@ export default function ProjectPage() {
             const taskData = {
                 ...newTask,
                 tags: newTask.tags ? newTask.tags.split(',').map(t => t.trim()) : [],
+                subtasks: newTask.subtasks,
             };
             await taskAPI.update(editingTask._id, taskData);
             setShowModal(false);
@@ -93,6 +98,7 @@ export default function ProjectPage() {
                 priority: 'medium',
                 status: 'todo',
                 tags: '',
+                subtasks: [],
             });
             fetchTasks();
             toast.success('Task updated successfully');
@@ -131,8 +137,52 @@ export default function ProjectPage() {
             priority: task.priority,
             status: task.status,
             tags: task.tags?.join(', ') || '',
+            subtasks: task.subtasks || [],
         });
         setShowModal(true);
+    };
+
+    const handleAIBreakdown = async () => {
+        if (!newTask.title) {
+            toast.error('Please enter a task title first');
+            return;
+        }
+
+        setIsGeneratingAI(true);
+        try {
+            const response = await taskAPI.breakdown({
+                title: newTask.title,
+                description: newTask.description
+            });
+
+            const generatedSubtasks = response.data.map((title: string) => ({
+                title,
+                completed: false
+            }));
+
+            setNewTask(prev => ({
+                ...prev,
+                subtasks: [...prev.subtasks, ...generatedSubtasks]
+            }));
+            toast.success('AI generated subtasks!');
+        } catch (error) {
+            toast.error('Failed to generate subtasks');
+        } finally {
+            setIsGeneratingAI(false);
+        }
+    };
+
+    const toggleSubtask = (index: number) => {
+        const updatedSubtasks = [...newTask.subtasks];
+        updatedSubtasks[index].completed = !updatedSubtasks[index].completed;
+        setNewTask({ ...newTask, subtasks: updatedSubtasks });
+    };
+
+    const removeSubtask = (index: number) => {
+        setNewTask({
+            ...newTask,
+            subtasks: newTask.subtasks.filter((_, i) => i !== index)
+        });
     };
 
     const getTasksByStatus = (status: 'todo' | 'in-progress' | 'completed') => {
@@ -357,6 +407,7 @@ export default function ProjectPage() {
                                         priority: 'medium',
                                         status: 'todo',
                                         tags: '',
+                                        subtasks: [],
                                     });
                                     setShowModal(true);
                                 }}
@@ -451,9 +502,21 @@ export default function ProjectPage() {
 
                                                     {/* Task Footer */}
                                                     <div className="flex items-center justify-between">
-                                                        <div className={`flex items-center space-x-1 px-2 py-1 text-xs font-medium rounded-lg border ${getPriorityColor(task.priority)}`}>
-                                                            {getPriorityIcon(task.priority)}
-                                                            <span className="capitalize">{task.priority}</span>
+                                                        <div className="flex items-center space-x-3">
+                                                            {task.subtasks && task.subtasks.length > 0 && (
+                                                                <div className="flex items-center space-x-1 text-[10px] font-medium text-gray-500 bg-white/5 px-1.5 py-0.5 rounded-md border border-white/5">
+                                                                    <svg className="w-3 h-3 text-emerald-500/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                                                    </svg>
+                                                                    <span>
+                                                                        {task.subtasks.filter(s => s.completed).length}/{task.subtasks.length}
+                                                                    </span>
+                                                                </div>
+                                                            )}
+                                                            <div className={`flex items-center space-x-1 px-2 py-1 text-xs font-medium rounded-lg border ${getPriorityColor(task.priority)}`}>
+                                                                {getPriorityIcon(task.priority)}
+                                                                <span className="capitalize">{task.priority}</span>
+                                                            </div>
                                                         </div>
 
                                                         {/* Quick Actions */}
@@ -715,6 +778,65 @@ export default function ProjectPage() {
                                     placeholder="frontend, bug, urgent"
                                     style={{ color: '#ffffff' }}
                                 />
+                            </div>
+
+                            <div className="border-t border-white/5 pt-4">
+                                <div className="flex items-center justify-between mb-4">
+                                    <label className="text-sm font-medium text-gray-300">
+                                        Subtasks
+                                    </label>
+                                    <button
+                                        type="button"
+                                        onClick={handleAIBreakdown}
+                                        disabled={isGeneratingAI}
+                                        className="inline-flex items-center space-x-2 px-3 py-1.5 bg-cyan-500/10 text-cyan-400 text-xs font-medium rounded-lg hover:bg-cyan-500/20 transition disabled:opacity-50"
+                                    >
+                                        {isGeneratingAI ? (
+                                            <div className="w-3 h-3 border-2 border-cyan-400/20 border-t-cyan-400 rounded-full animate-spin"></div>
+                                        ) : (
+                                            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                            </svg>
+                                        )}
+                                        <span>AI Breakdown</span>
+                                    </button>
+                                </div>
+
+                                <div className="space-y-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                                    {newTask.subtasks.map((subtask, index) => (
+                                        <div key={index} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg group/subtask border border-transparent hover:border-white/5 transition">
+                                            <button
+                                                type="button"
+                                                onClick={() => toggleSubtask(index)}
+                                                className={`w-5 h-5 rounded-md border flex items-center justify-center transition ${subtask.completed
+                                                    ? 'bg-emerald-500 border-emerald-500 text-white'
+                                                    : 'border-white/10 text-transparent hover:border-white/30'
+                                                    }`}
+                                            >
+                                                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            </button>
+                                            <span className={`text-sm flex-1 ${subtask.completed ? 'text-gray-500 line-through' : 'text-gray-300'}`}>
+                                                {subtask.title}
+                                            </span>
+                                            <button
+                                                type="button"
+                                                onClick={() => removeSubtask(index)}
+                                                className="opacity-0 group-hover/subtask:opacity-100 p-1 text-gray-500 hover:text-red-400 transition"
+                                            >
+                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    ))}
+                                    {newTask.subtasks.length === 0 && (
+                                        <div className="text-center py-4 bg-white/[0.02] border border-dashed border-white/5 rounded-xl">
+                                            <p className="text-xs text-gray-500 font-medium">No subtasks. Try AI Breakdown!</p>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="flex space-x-3 pt-2">

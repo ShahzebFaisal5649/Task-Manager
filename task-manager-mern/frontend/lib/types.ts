@@ -28,6 +28,7 @@ export interface Task {
     project: string | Project;
     assignedTo?: User;
     createdBy: User;
+    subtasks?: { title: string; completed: boolean; _id?: string }[];
     createdAt: string;
     updatedAt: string;
 }

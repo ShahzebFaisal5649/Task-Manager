@@ -13,6 +13,7 @@
   <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB">
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind">
+  <img src="https://img.shields.io/badge/Gemini_AI-8E75B2?style=for-the-badge&logo=google&logoColor=white" alt="Gemini AI">
   <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
 </p>
 
@@ -93,6 +94,7 @@ Track your task progress with visual indicators and statistics.
 | **Authentication** | Secure JWT-based login & registration |
 | **Projects** | Create, edit, delete projects with custom colors |
 | **Tasks** | Full CRUD with status & priority tracking |
+| **AI Breakdown** | Automatically break down tasks into subtasks using Google Gemini AI |
 | **Dashboard** | Real-time statistics and progress tracking |
 | **Kanban Board** | Visual task management with status columns |
 | **Quick Actions** | Rapidly create tasks from dashboard |
@@ -140,6 +142,9 @@ Track your task progress with visual indicators and statistics.
 - **bcryptjs** - Password hashing
 - **Axios** - HTTP client
 - **js-cookie** - Cookie management
+
+### AI Integration
+- **Google Gemini AI** - Gemini 2.5 Flash model for intelligent task breakdown
 
 ### Database
 - **MongoDB** - NoSQL database (hosted on Railway)
@@ -275,6 +280,11 @@ task-manager-mern/
 | `PUT` | `/api/tasks/:id` | Update task |
 | `DELETE` | `/api/tasks/:id` | Delete task |
 
+### AI
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/ai/breakdown` | Generate subtasks from task title using AI |
+
 ---
 
 ## Deployment
@@ -318,6 +328,7 @@ task-manager-mern/
 |----------|-------------|----------|
 | `MONGODB_URI` | MongoDB connection string | Yes |
 | `JWT_SECRET` | Secret key for JWT tokens | Yes |
+| `GEMINI_API_KEY` | Google Gemini API key for AI features | Yes |
 | `NEXT_PUBLIC_API_URL` | API base URL (use `/api` for production) | No |
 
 ---

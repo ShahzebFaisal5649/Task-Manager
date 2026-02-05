@@ -55,6 +55,8 @@ export const taskAPI = {
         api.post(`/projects/${projectId}/tasks`, data),
     update: (id: string, data: any) => api.put(`/tasks/${id}`, data),
     delete: (id: string) => api.delete(`/tasks/${id}`),
+    breakdown: (data: { title: string; description?: string }) =>
+        api.post('/ai/breakdown', data),
 };
 
 export default api;

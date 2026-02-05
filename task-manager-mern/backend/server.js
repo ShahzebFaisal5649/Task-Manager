@@ -35,8 +35,6 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Handle preflight requests
-app.options('*', cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -45,6 +43,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));
 app.use('/api', require('./routes/taskRoutes'));
+app.use('/api/ai', require('./routes/aiRoutes'));
 
 // Test route
 app.get('/', (req, res) => {
